@@ -63,5 +63,10 @@ namespace Lalalend_3
             }
             return "";
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChangedCommand(comboBox1.SelectedItem as string);
+        }
     }
 }

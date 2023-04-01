@@ -1,7 +1,9 @@
 ﻿using Lalalend_3.core;
 using Lalalend_3.src.view;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -10,11 +12,12 @@ namespace Lalalend_3
     public partial class Form1 : Form, IChartView
     {
         public event Action RequestedStatistics;
+        public event Action<string> ChangedCommand;
 
         public Form1(IChartPresenter presenter)
         {
-            presenter.View = this;
             InitializeComponent();
+            presenter.View = this;
         }
 
         public void ShowAdditionalInfo(string info)
@@ -41,6 +44,24 @@ namespace Lalalend_3
         private void button1_Click(object sender, EventArgs e)
         {
             RequestedStatistics?.Invoke();
+        }
+
+        public void SetCommands(List<string> commands)
+        {
+            comboBox1.Items.Clear();
+            comboBox1.Items.AddRange(commands.ToArray());
+        }
+
+        public string GetCSV()
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamReader reader = new StreamReader(openFileDialog1.FileName))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+            return "";
         }
     }
 }

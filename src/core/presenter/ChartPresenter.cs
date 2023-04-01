@@ -1,21 +1,47 @@
-﻿using Lalalend_3.src.view;
+﻿using Lalalend_3.core.commands;
+using Lalalend_3.src.core.commands;
+using Lalalend_3.src.view;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Lalalend_3.core
 {
     internal class ChartPresenter : IChartPresenter
     {
-        IChartView view;
-        public IChartView View { set
+        /// <summary>
+        /// Словарь, содержащий фабрику для каждой команды.
+        /// </summary>
+        /// <example>
+        /// {"some_command", () => new SomeCommandFactory}
+        /// </example>
+        static Dictionary<string, Func<AbstractCommandFactory>> commands
+            = new Dictionary<string, Func<AbstractCommandFactory>>()
             {
-                view.RequestedStatistics -= RunCommand;
-                view = value;
-                view.RequestedStatistics += RunCommand;
+            };
+
+        AbstractCommandFactory commandFactory;
+
+        IChartView view;
+
+        public IChartView View
+        {
+            set
+            {
+                if (view != null)
+                {
+                    this.view.RequestedStatistics -= RunCommand;
+                    this.view.ChangedCommand -= ChangeCommand;
+                }
+                this.view = value;
+                this.view.RequestedStatistics += RunCommand;
+                this.view.ChangedCommand += ChangeCommand;
+                view.SetCommands(commands.Keys.ToList());
             }
         }
 
@@ -36,7 +62,15 @@ namespace Lalalend_3.core
 
         private void RunCommand()
         {
+            string csv = view.GetCSV();
+            if (csv == "" || commandFactory == null) return;
+            var command = commandFactory.CreateFromCSV(csv);
+            command.Run(this);
+        }
 
+        private void ChangeCommand(String code)
+        {
+            commandFactory = commands[code]();
         }
     }
 }

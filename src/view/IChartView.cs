@@ -10,6 +10,7 @@ namespace Lalalend_3.src.view
     public interface IChartView
     {
         event Action RequestedStatistics;
+        event Action<String> ChangedCommand;
 
         /// <summary>
         /// Выводит на экран график [series]
@@ -25,5 +26,9 @@ namespace Lalalend_3.src.view
         /// Выводит на экран таблицу.
         /// </summary>
         void ShowGrid(List<string> columnsName, List<List<string>> rows);
+
+        void SetCommands(List<string> commands);
+
+        String GetCSV();
     }
 }

@@ -47,8 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="core\presenter\ChartPresenter.cs" />
     <Compile Include="core\commands\AbstractChartCommand.cs" />
-    <Compile Include="core\IChartPresenter.cs" />
+    <Compile Include="core\presenter\IChartPresenter.cs" />
     <Compile Include="view\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

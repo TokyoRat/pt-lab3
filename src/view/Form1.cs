@@ -48,13 +48,12 @@ namespace Lalalend_3
             }
 
             dataGridView1.Rows.Clear();
-            foreach (var row in rows)
+            for (int i = 0; i < rows.Count; i++)
             {
                 dataGridView1.Rows.Add();
-                for (int i = 0; i < columnsName.Count; i++)
+                for (int j = 0; j < columnsName.Count; j++)
                 {
-                    dataGridView1[columnsName[i], dataGridView1.Rows.Count - 1].Value 
-                        = row[i];
+                    dataGridView1[columnsName[j], i].Value = rows[i][j];
                 }
             }
         }

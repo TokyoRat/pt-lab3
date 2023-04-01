@@ -7,9 +7,6 @@ namespace Lalalend_3.core.commands
     /// </summary>
     public interface IChartCommand
     {
-        /// <param name="data">Текст статистики.</param>
-        IChartCommand FromCSV(String data);
-
         /// <summary>
         /// Выполнить команду.
         /// </summary>

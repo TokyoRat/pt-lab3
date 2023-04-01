@@ -1,21 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
 
 namespace Lalalend_3.core.commands
 {
+    /// <summary>
+    /// Команда отображения статистики.
+    /// </summary>
     internal abstract class AbstractChartCommand
     {
-        readonly string filePath;
+        /// <summary>
+        /// Текущие данные статистики.
+        /// </summary>
+        readonly string data;
 
-        public AbstractChartCommand(String path)
+        /// <param name="data">Текст статистики.</param>
+        public AbstractChartCommand(String data)
         {
-            filePath = path;
+            this.data = data;
         }
 
+        /// <summary>
+        /// Выполнить команду.
+        /// </summary>
+        /// <param name="presenter">Презентер, отвечающий за отображение на экране.</param>
         public abstract void Run(IChartPresenter presenter);
     }
 }

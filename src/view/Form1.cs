@@ -1,7 +1,6 @@
 ﻿using Lalalend_3.core;
 using Lalalend_3.src.view;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -36,9 +35,27 @@ namespace Lalalend_3
 
         public void ShowGrid(List<string> columnsName, List<List<string>> rows)
         {
-            var list = new List<List<string>>(rows);
-            list.Insert(0, columnsName);
-            dataGridView1.DataSource = list;
+
+            dataGridView1.Columns.Clear();
+            foreach (var column in columnsName)
+            {
+                var dataColumn = new DataGridViewColumn();
+                dataColumn.HeaderText = column;
+                dataColumn.Name = column;
+                dataColumn.ReadOnly = true;
+                dataColumn.CellTemplate = new DataGridViewTextBoxCell();
+                dataGridView1.Columns.Add(dataColumn);
+            }
+
+            dataGridView1.Rows.Clear();
+            for (int i = 0; i < rows.Count; i++)
+            {
+                dataGridView1.Rows.Add();
+                for (int j = 0; j < columnsName.Count; j++)
+                {
+                    dataGridView1[columnsName[j], i].Value = rows[i][j];
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lalalend_3.src.view;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,19 +10,33 @@ namespace Lalalend_3.core
 {
     internal class ChartPresenter : IChartPresenter
     {
-        public void ShowAdditionalInfo(string info)
-        {
-            throw new NotImplementedException();
+        IChartView view;
+        public IChartView View { set
+            {
+                view.RequestedStatistics -= RunCommand;
+                view = value;
+                view.RequestedStatistics += RunCommand;
+            }
         }
 
-        public void ShowChart(Series series)
+        public void ShowAdditionalInfo(string info)
         {
-            throw new NotImplementedException();
+            view.ShowAdditionalInfo(info);
+        }
+
+        public void ShowChart(List<Series> series)
+        {
+            view.ShowChart(series);
         }
 
         public void ShowGrid(List<string> columnsName, List<List<string>> rows)
         {
-            throw new NotImplementedException();
+            view.ShowGrid(columnsName, rows);
+        }
+
+        private void RunCommand()
+        {
+
         }
     }
 }

@@ -26,8 +26,8 @@ namespace Lalalend_3.core
         static Dictionary<string, Func<AbstractCommandFactory>> commands
             = new Dictionary<string, Func<AbstractCommandFactory>>()
             {
-                {"Курс рубля", () => new CurrenciesCommandFactory()}
-                {"Турпоток", () => new TouristsCommandFactory()}
+                {"Курс рубля", () => new CurrenciesCommandFactory()},
+                {"Турпоток", () => new TouristsCommandFactory()},
                 { "Популяция страны", () => new PopulationCommandFactory() }
             };
 

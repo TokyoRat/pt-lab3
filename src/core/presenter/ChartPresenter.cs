@@ -1,6 +1,8 @@
 ﻿using Lalalend_3.core.commands;
 using Lalalend_3.src.core.commands;
 using Lalalend_3.src.core.commands.сurrencies_сommand;
+using Lalalend_3.src.core.commands.tourists_commands;
+using Lalalend_3.src.core.commands.population;
 using Lalalend_3.src.view;
 using System;
 using System.Collections.Generic;
@@ -25,6 +27,8 @@ namespace Lalalend_3.core
             = new Dictionary<string, Func<AbstractCommandFactory>>()
             {
                 {"Курс рубля", () => new CurrenciesCommandFactory()}
+                {"Турпоток", () => new TouristsCommandFactory()}
+                { "Популяция страны", () => new PopulationCommandFactory() }
             };
 
         AbstractCommandFactory commandFactory;

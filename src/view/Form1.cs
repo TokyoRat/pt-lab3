@@ -31,6 +31,7 @@ namespace Lalalend_3
             {
                 chart1.Series.Add(tmp);
             }
+            chart1.ChartAreas[0].AxisY.IsStartedFromZero = false;
         }
 
         public void ShowGrid(List<string> columnsName, List<List<string>> rows)

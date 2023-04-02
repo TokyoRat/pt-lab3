@@ -21,7 +21,7 @@ namespace Lalalend_3.core
         /// Словарь, содержащий фабрику для каждой команды.
         /// </summary>
         /// <example>
-        /// {"some_command", () => new SomeCommandFactory}
+        /// {"some_command", () => new SomeCommandFactory()}
         /// </example>
         static Dictionary<string, Func<AbstractCommandFactory>> commands
             = new Dictionary<string, Func<AbstractCommandFactory>>()

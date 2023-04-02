@@ -36,18 +36,15 @@ namespace Lalalend_3.src.core.commands.population
             Series populationSeries = new Series();
             populationSeries.ChartType = SeriesChartType.Spline;
             populationSeries.YAxisType = AxisType.Primary;
-            foreach(var point in data)
-            {
-                populationSeries.Points.AddXY(point[0], point[1]);
-            }
+            populationSeries.Name = "Популяция, чел.";
+            data.ForEach((point) => populationSeries.Points.AddXY(point[0], point[1]));
 
             Series growSeries = new Series();
-            growSeries.ChartType = SeriesChartType.Spline;
+            growSeries.ChartType = SeriesChartType.FastLine;
             growSeries.YAxisType = AxisType.Secondary;
-            foreach (var point in data)
-            {
-                growSeries.Points.AddXY(point[0], point[2]);
-            }
+            growSeries.Name = "Рост от пред. года, чел.";
+            data.ForEach((point) => growSeries.Points.AddXY(point[0], point[2]));
+
             presenter.ShowChart(new List<Series> { populationSeries, growSeries });
 
             // Info display

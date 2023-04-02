@@ -11,7 +11,8 @@ namespace Lalalend_3.src.core.commands.сurrencies_сommand
     {
         public override IChartCommand CreateFromCSV(string csv)
         {
-            List<List<string>> list = (List<List<string>>)csv.Split('\n').Select((e) => e.Split(';'));
+            var csvList = csv.Split('\n').ToList();
+            List<List<string>> list = csvList.Select((e) => e.Split(';').ToList()).ToList();
 
             return new CurrenciesCommand(list);
         }

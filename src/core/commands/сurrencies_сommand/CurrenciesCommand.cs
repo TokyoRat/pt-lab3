@@ -4,6 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Xml.Linq;
+using System.Xml.Schema;
 
 namespace Lalalend_3.core.commands
 {
@@ -17,7 +20,10 @@ namespace Lalalend_3.core.commands
 
         public void Run(IChartPresenter presenter)
         {
+            //Формирование таблицы
             presenter.ShowGrid(new List<string>() { "Дата", "Курс к доллару", "Курс к евро" }, data);
+
+            //Поиск и вывод наибольшего роста валют
             string[] dollarMax = { "0", "0", "0" };
             string[] euroMax = { "0", "0", "0" }; ;
             float difference;
@@ -39,6 +45,25 @@ namespace Lalalend_3.core.commands
                 }
             }
             presenter.ShowAdditionalInfo($"Наибольший рост доллара (+{dollarMax[2]}) произошел {dollarMax[0]}\nНаибольший рост евро (+{euroMax[2]}) произошел {euroMax[0]}");
+
+            //Построение графика
+            Series dollarSeries = new Series();
+            dollarSeries.ChartType = SeriesChartType.FastLine;
+            dollarSeries.Name = "Курс доллара";
+            foreach (var poz in data)
+            {
+                dollarSeries.Points.AddXY(poz[0], poz[1]);
+            }
+
+            Series euroSeries = new Series();
+            euroSeries.ChartType = SeriesChartType.FastLine;
+            euroSeries.Name = "Курс евро";
+            foreach (var poz in data)
+            {
+                euroSeries.Points.AddXY(poz[0], poz[2]);
+            }
+            presenter.ShowChart(new List<Series> { dollarSeries, euroSeries });
+
         }
     }
 }

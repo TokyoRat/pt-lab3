@@ -50,6 +50,8 @@
     <Compile Include="src\core\commands\AbstractCommandFactory.cs" />
     <Compile Include="src\core\commands\tourists_commands\TouristsCommand.cs" />
     <Compile Include="src\core\commands\tourists_commands\TouristsCommandFactory.cs" />
+    <Compile Include="src\core\commands\population\PopulationCommand.cs" />
+    <Compile Include="src\core\commands\population\PopulationCommandFactory.cs" />
     <Compile Include="src\core\presenter\ChartPresenter.cs" />
     <Compile Include="src\core\commands\IChartCommand.cs" />
     <Compile Include="src\core\presenter\IChartPresenter.cs" />
@@ -74,6 +76,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="assets\population.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

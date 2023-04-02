@@ -1,5 +1,6 @@
 ﻿using Lalalend_3.core.commands;
 using Lalalend_3.src.core.commands;
+using Lalalend_3.src.core.commands.tourists_commands;
 using Lalalend_3.src.core.commands.population;
 using Lalalend_3.src.view;
 using System;
@@ -24,6 +25,7 @@ namespace Lalalend_3.core
         static Dictionary<string, Func<AbstractCommandFactory>> commands
             = new Dictionary<string, Func<AbstractCommandFactory>>()
             {
+                {"Турпоток", () => new TouristsCommandFactory()}
                 { "Популяция страны", () => new PopulationCommandFactory() }
             };
 
